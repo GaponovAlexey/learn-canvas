@@ -1,11 +1,11 @@
+import CanMain from './components/CanMain'
 
 function App() {
   return (
-    
-      <div>
-        start
-      </div>
-  );
+    <div>
+      <CanMain />
+    </div>
+  )
 }
 
-export default App;
+export default App
