@@ -1,27 +1,28 @@
-import { useGLTF, PerspectiveCamera } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import { Suspense } from 'react'
+import Model from '../Models/myModel'
 
-export default function Model(props) {
-  const { nodes, materials } = useGLTF('/model.gltf')
+const CanMain = () => {
   return (
-    <group {...props} dispose={null}>
-      <group
-        name='camera'
-        position={[10, 0, 50]}
-        rotation={[Math.PI / 2, 0, 0]}
-      >
-        <PerspectiveCamera fov={40} near={10} far={1000} />
-      </group>
-      <group
-        name='sun'
-        position={[100, 50, 100]}
-        rotation={[-Math.PI / 2, 0, 0]}
-      >
-        <pointLight intensity={10} />
-      </group>
-      <mesh geometry={nodes.robot.geometry} material={materials.metal} />
-      <mesh geometry={nodes.rocket.geometry} material={materials.wood} />
-    </group>
+    <>
+      <Canvas camera={{ position: [0, 2, 4], zoom: 1 }}>
+        <OrbitControls />
+        <color attach='background' args={['lightblue']} />
+        <hemisphereLight intensity={0.35} />
+        <spotLight
+          position={[10, 10, 10]}
+          angle={0.3}
+          penumbra={1}
+          intensity={2}
+          castShadow
+        />
+        <Suspense fallback={null}>
+          <Model />
+        </Suspense>
+      </Canvas>
+    </>
   )
 }
 
-useGLTF.preload('/model.gltf')
+export default CanMain
