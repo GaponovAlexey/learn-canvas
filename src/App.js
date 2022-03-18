@@ -1,9 +1,10 @@
+import Model from './components/CanMain'
 import CanMain from './components/CanMain'
 
 function App() {
   return (
     <div>
-      <CanMain />
+      <Model />
     </div>
   )
 }
